@@ -9,8 +9,8 @@ public class TestDBConnection {
 
     public static void main(String[] args) {
         String url = "jdbc:sqlserver://localhost\\SQLEXPRESS02:1433;databaseName=Hospital_Document_System1;encrypt=true;trustServerCertificate=true";
-        String username = "alparjan";
-        String password = "123456";
+        String username = "DbUserName";
+        String password = "DbPassword";
 
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
