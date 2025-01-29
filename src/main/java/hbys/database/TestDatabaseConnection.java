@@ -8,8 +8,9 @@ public class TestDatabaseConnection {
 
     public static void main(String[] args) {
         final String URL = "jdbc:sqlserver://localhost\\SQLEXPRESS02:1433;databaseName=Hospital_Document_System1;encrypt=true;trustServerCertificate=true";
-        final String USERNAME = "alparjan";
-        final String PASSWORD = "123456";
+        final String USERNAME = "DbUserName";
+        final String PASSWORD = "DbPassword";
+         
 
         Connection connection = null;
 
