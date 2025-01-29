@@ -1,0 +1,85 @@
+CREATE PROCEDURE GetAllAppointments
+AS
+BEGIN
+    SELECT * FROM Appointments;
+END;
+
+
+
+
+CREATE PROCEDURE AddAppointment
+    @PatientID INT,
+    @DoctorID INT,
+    @AppointmentDate DATETIME,
+    @Status NVARCHAR(50),
+    @Notes NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO Appointments (PatientID, DoctorID, AppointmentDate, Status, Notes)
+    VALUES (@PatientID, @DoctorID, @AppointmentDate, @Status, @Notes);
+END;
+
+
+
+
+CREATE PROCEDURE UpdateAppointment
+    @AppointmentID INT,
+    @PatientID INT,
+    @DoctorID INT,
+    @AppointmentDate DATETIME,
+    @Status NVARCHAR(50),
+    @Notes NVARCHAR(255)
+AS
+BEGIN
+    UPDATE Appointments
+    SET PatientID = @PatientID,
+        DoctorID = @DoctorID,
+        AppointmentDate = @AppointmentDate,
+        Status = @Status,
+        Notes = @Notes
+    WHERE AppointmentID = @AppointmentID;
+END;
+
+
+
+
+CREATE PROCEDURE DeleteAppointment
+    @AppointmentID INT
+AS
+BEGIN
+    DELETE FROM Appointments
+    WHERE AppointmentID = @AppointmentID;
+END;
+
+
+
+
+CREATE PROCEDURE SearchAppointments
+    @Keyword NVARCHAR(255)
+AS
+BEGIN
+    SELECT * FROM Appointments
+    WHERE Status LIKE @Keyword OR Notes LIKE @Keyword;
+END;
+
+
+
+CREATE FUNCTION IsRoomAvailable (@RoomID INT)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @IsAvailable BIT;
+
+    SELECT @IsAvailable = 
+    CASE 
+        WHEN AvailabilityStatus = 'Available' THEN 1
+        ELSE 0
+    END
+    FROM Rooms
+    WHERE RoomID = @RoomID;
+
+    RETURN @IsAvailable;
+END;
+
+
+select * from Users
